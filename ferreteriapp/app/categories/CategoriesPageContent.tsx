@@ -35,6 +35,30 @@ export default function CategoriesPageContent() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // Si no hay categorías, agregamos unas por defecto
+    if (!localStorage.getItem("categories")) {
+      const categoriasIniciales: Category[] = [
+        { id: "1", name: "Herramientas", icon: "🔧", active: true },
+        { id: "2", name: "Pinturas", icon: "🎨", active: true },
+        { id: "3", name: "Electricidad", icon: "💡", active: true },
+        { id: "4", name: "Fontanería", icon: "🚰", active: true }
+      ]
+      localStorage.setItem("categories", JSON.stringify(categoriasIniciales))
+    }
+
+    // Si no hay productos, agregamos unos por defecto
+    if (!localStorage.getItem("products")) {
+      const productosIniciales: Product[] = [
+        { id: "1", name: "Martillo", description: "Martillo de acero", price: 150, image: "/martillo.jpg", category: "Herramientas", stock: 10, active: true },
+        { id: "2", name: "Brocha", description: "Brocha para pintura", price: 50, image: "/brocha.jpg", category: "Pinturas", stock: 25, active: true },
+        { id: "3", name: "Bombillo LED", description: "Bombillo LED 9W", price: 30, image: "/bombillo.jpg", category: "Electricidad", stock: 50, active: true },
+        { id: "4", name: "Llave inglesa", description: "Llave ajustable", price: 120, image: "/llave.jpg", category: "Herramientas", stock: 15, active: true },
+        { id: "5", name: "Pintura blanca", description: "Pintura látex 1 galón", price: 250, image: "/pintura.jpg", category: "Pinturas", stock: 8, active: true },
+        { id: "6", name: "Tubo PVC", description: "Tubo PVC 1 pulgada", price: 80, image: "/tubo.jpg", category: "Fontanería", stock: 20, active: true }
+      ]
+      localStorage.setItem("products", JSON.stringify(productosIniciales))
+    }
+
     loadData()
   }, [])
 
